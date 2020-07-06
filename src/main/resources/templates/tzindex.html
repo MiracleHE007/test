@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <span >成功</span>
+    <div th:text="${session.loginName}"></div>
+    <input type="button" th:value="${session.loginName}">
+<table border="1px;" cellspacing="0">
+    <tr style="width: 20%">
+        <td>日志类型</td>
+        <td>日志标题</td>
+    </tr>
+    <tr style="width: 20%">
+        <td>日志类型</td>
+        <td>日志标题</td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wondersgroup.cmxm.repository.TestARepository">
+    <resultMap id="loginMap" type="com.wondersgroup.cmxm.dataobject.TestA">
+        <id column="login_id" property="loginId"></id>
+        <result column="login_user" property="loginUser"></result>
+        <result column="login_password" property="loginPassword"></result>
+        <result column="login_status" property="loginStatus"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="update_time" property="updateTime"></result>
+    </resultMap>
+    <select id="findAllByLoginId" parameterType="int" resultMap="loginMap">
+        select a.login_Id,a.login_user,a.login_password,a.login_status,a.create_time,a.update_time from tb_login a where login_id = #{loginId}
+    </select>
+
+    <select id="selAll" parameterType="int" resultType="com.wondersgroup.cmxm.dataobject.TestA">
+        select a.id,a.question_desc,d.problem_name,c.solve_name,b.login_user,a.question_bz,a.create_time,a.update_time from tb_question a
+        left join tb_login b on a.login_id=b.login_id
+        left join tb_solve c on a.solve_status=c.solve_status
+        left join tb_problemtype d on a.problem_type=d.problem_type
+        where a.login_id=#{loginId}
+        order by a.id asc
+    </select>
+
+    <select id="selxiangxi" parameterType="int" resultType="com.wondersgroup.cmxm.dataobject.TestA">
+        select a.id,a.question_desc,d.problem_name,c.solve_name,b.login_user,a.question_bz,a.create_time,a.update_time from tb_question a
+        left join tb_login b on a.login_id=b.login_id
+        left join tb_solve c on a.solve_status=c.solve_status
+        left join tb_problemtype d on a.problem_type=d.problem_type
+        where a.id=#{questionId}
+    </select>
+
+    <select id="selForXX"  resultType="com.wondersgroup.cmxm.dataobject.TestA">
+        select a.id,a.question_desc,d.problem_name,c.solve_name,b.login_user,a.question_bz,a.create_time,a.update_time from tb_question a
+        left join tb_login b on a.login_id=b.login_id
+        left join tb_solve c on a.solve_status=c.solve_status
+        left join tb_problemtype d on a.problem_type=d.problem_type
+        where a.login_id=#{login_id}
+        <if test="problem_type !=null and problem_type!=''">
+            and a.problem_type =#{problem_type}
+        </if>
+        <if test="solve_status !=null and solve_status!=''">
+            and a.solve_status =#{solve_status}
+        </if>
+        <if test="question_desc !=null and question_desc!=''">
+            and a.question_desc like "%"#{question_desc}"%"
+        </if>
+        <if test="create_time !=null">
+            and a.create_time >= #{create_time}
+        </if>
+        <if test="cjsj2 !=null">
+            and a.create_time &lt; #{cjsj2}
+        </if>
+        <if test="update_time !=null">
+            and a.update_time >= #{update_time}
+        </if>
+        <if test="xgsj2 !=null">
+            and a.update_time &lt; #{xgsj2}
+        </if>
+        order by a.id asc
+
+    </select>
+
+    <select id="exportBfhtreswExcel" resultType="com.wondersgroup.cmxm.dataobject.TestA">
+        select a.id,a.question_desc,d.problem_name,c.solve_name,b.login_user,a.question_bz,a.create_time,a.update_time from tb_question a
+        left join tb_login b on a.login_id=b.login_id
+        left join tb_solve c on a.solve_status=c.solve_status
+        left join tb_problemtype d on a.problem_type=d.problem_type
+        where a.login_id=#{login_id}
+        <if test="problem_type !=null and problem_type!=''">
+            and a.problem_type =#{problem_type}
+        </if>
+        <if test="solve_status !=null and solve_status!=''">
+            and a.solve_status =#{solve_status}
+        </if>
+        <if test="question_desc !=null and question_desc!=''">
+            and a.question_desc like "%"#{question_desc}"%"
+        </if>
+        <if test="create_time !=null">
+            and a.create_time >= #{create_time}
+        </if>
+        <if test="cjsj2 !=null">
+            and a.create_time &lt; #{cjsj2}
+        </if>
+        <if test="update_time !=null">
+            and a.update_time >= #{update_time}
+        </if>
+        <if test="xgsj2 !=null">
+            and a.update_time &lt; #{xgsj2}
+        </if>
+        order by a.id asc
+
+    </select>
+
+
+</mapper>

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <title>学籍修改</title>
+    <link rel="stylesheet" rev="stylesheet" href="css/style.css" type="text/css" media="all" />
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script language="JavaScript" type="text/javascript">
+
+
+        //function check()
+        //{
+        //document.getElementById("aa").style.display="";
+        //}
+
+
+        //function link(){
+        //alert('保存成功！');
+        //  document.getElementById("fom").action="xuqiumingxi.htm";
+        // document.getElementById("fom").submit();
+        //}
+
+
+
+    </script>
+
+    <style type="text/css">
+        <!--
+        .atten {font-size:12px;font-weight:normal;color:#F00;}
+        -->
+    </style>
+</head>
+
+<body class="ContentBody">
+    <div class="MainDiv">
+        <table width="99%" border="0" cellpadding="0" cellspacing="0" class="CContent">
+            <tr>
+                <th style="height: 40px;" bgcolor="#46B8DA" class="tablestyle_title" >问题详细内容</th>
+            </tr>
+            <tr>
+                <td class="CPanel">
+
+                    <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                        <tr><td align="left">
+                        </td></tr>
+
+                        <TR>
+                            <TD width="100%">
+                                <fieldset style="height:100%;">
+                                    <legend>问题详细</legend>
+                                    <table border="0"   cellpadding="2" cellspacing="1" style="width:100%">
+                                        <tr style="height:40px;">
+                                            <td width="25%"> <label>问题id</label></td>
+                                            <td width="25%" th:text="${question_id}"></td>
+                                        </tr>
+                                        <tr style="height:40px;">
+                                            <td width="25%"> <label>问题描述</label></td>
+                                            <td width="25%"  th:text="${question_desc}"></td>
+                                        </tr>
+                                        <tr style="height:40px;">
+                                            <td width="25%"> <label>问题类型</label></td>
+                                            <td width="25%"  th:text="${problem_name}"></td>
+                                        </tr>
+                                        <tr style="height:40px;">
+                                            <td width="25%"> <label>归属人</label></td>
+                                            <td width="25%"  th:text="${login_user}"></td>
+                                        </tr>
+                                        <tr style="height:40px;">
+                                            <td width="25%"> <label>备注</label></td>
+                                            <td width="25%"  th:text="${question_bz}"></td>
+                                        </tr>
+                                        <tr style="height:40px;">
+                                            <td width="25%"> <label>解决状态</label></td>
+                                            <td width="25%" th:text="${solve_name}"></td>
+                                        </tr>
+                                        <tr style="height:40px;">
+                                            <td width="25%"> <label>创建时间</label></td>
+                                            <td width="25%" th:text="${create_time}"></td>
+                                        </tr>
+                                        <tr style="height:40px;">
+                                            <td width="25%"> <label>修改时间</label></td>
+                                            <td width="25%" th:text="${update_time}"></td>
+                                        </tr>
+
+
+
+                                    </table>
+                                    <br />
+                                </fieldset>			</TD>
+                        </TR>
+
+                    </TABLE>
+
+
+                </td>
+            </tr>
+
+
+
+
+
+
+            <tr>
+                <TD colspan="2" align="center" height="50px">
+                   </tr>
+        </table>
+
+
+        </td>
+        </tr>
+
+
+
+
+        </table>
+
+    </div>
+</body>
+
+</html>
+

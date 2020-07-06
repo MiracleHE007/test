@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wondersgroup.cmxm.repository.QuestionRepository">
+
+   <delete id="deleteForId" parameterType="int">
+        delete from  tb_question where id=#{questionId}
+   </delete>
+
+    <insert id="insertQuestion" parameterType="com.wondersgroup.cmxm.dataobject.Question">
+        insert into tb_question (question_desc,solve_status,login_id,problem_type) values (#{question_desc},#{solve_status},#{login_id},#{problem_type})
+    </insert>
+
+    <update id="updateQuestionId" parameterType="com.wondersgroup.cmxm.dataobject.Question">
+        update tb_question set solve_status='2' where id=#{id}
+    </update>
+
+    <update id="inserBz" parameterType="com.wondersgroup.cmxm.dataobject.Question">
+        update tb_question set question_bz=#{question_bz} where id=#{id}
+    </update>
+
+
+</mapper>

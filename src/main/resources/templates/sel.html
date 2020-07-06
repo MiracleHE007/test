@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+	<title>学籍查询 </title>
+<!--<link href="../css/bootstrap.min.css" rel="stylesheet"/> -->
+
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/jquery.idealforms.js"></script>
+	<link rel="stylesheet" rev="stylesheet" href="css/style.css" type="text/css" media="all" />
+	<link href="css/bootstrap-theme.min.css" rel="stylesheet"/>
+	<script language="JavaScript" type="text/javascript">
+	</script>
+	<style type="text/css">
+		<!--
+		.atten {font-size:12px;font-weight:normal;color:#F00;}
+		-->
+	</style>
+	<script type="text/javascript">
+		var bs='<%=basePath%>'
+	</script>
+</head>
+
+<body class="ContentBody">
+<!-- onsubmit="return admin_sele()" -->
+<form action="" method="post" name="selfom" id="selfom"  >
+	<div class="MainDiv">
+		<table width="99%" border="0" cellpadding="0" cellspacing="0" class="CContent">
+			<tr>
+				<th class="tablestyle_title" >问题查询页面</th>
+			</tr>
+			<tr>
+				<td class="CPanel">
+
+					<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+						<tr><td align="left">
+						</td></tr>
+
+						<TR>
+							<TD width="100%">
+								<fieldset style="height:100%;">
+									<legend>条件查询</legend>
+
+									<table border="0"   cellpadding="2" cellspacing="1" style="width:100%">
+										<tr>
+											<td width="15%"> <label>描述关键字</label></td>
+											<td width="35%"><input type="text"  name="desc" id="desc"  /> </td>
+
+											<td width="15%"> <label>是否解决</label></td>
+											<td width="35%"><select name="solveStatus" id="solveStatus">
+												<option value="">请选择</option>
+												<option  th:each="li:${solveList}" th:text="${li.solve_name}" th:value="${li.solve_status}"></option>
+											</select> </td>
+
+										</tr>
+										<tr>
+											<br />
+										<tr>
+											<td width="15%"> <label>创建时间大于等于</label></td>
+											<td width="35%"><input type="date"  name="cjsj1" id="cjsj1"  /> </td>
+
+										<td width="15%"> <label>创建时间小于</label></td>
+										<td width="35%"><input type="date"  name="cjsj2" id="cjsj2"  /> </td>
+										</tr>
+										<tr>
+											<td width="15%"> <label>修改时间大于等于</label></td>
+											<td width="35%"><input type="date"  name="xgsj1" id="xgsj1"  /> </td>
+
+											<td width="15%"> <label>修改时间小于</label></td>
+											<td width="35%"><input type="date"   id="xgsj2" name="xgsj2" /> </td>
+										</tr>
+										<tr>
+											<td width="15%"> <label>问题类型</label></td>
+											<td width="35%"><select name="problemType" id="problemType">
+												<option value="">请选择</option>
+												<option  th:each="lis:${problemList}" th:text="${lis.problem_name}" th:value="${lis.problem_type}"></option>
+											</select> </td>
+
+											</td>
+										</tr>
+									</table>
+									<br />
+								</fieldset>			</TD>
+						</TR>
+
+					</TABLE>
+
+
+				</td>
+			</tr>
+
+
+
+
+
+
+			<TR>
+				<TD colspan="2" align="center" height="50px">
+					<input type="button"  name="button" value="查询" onclick="seltj()" class="button" />　
+			</TR>
+		</TABLE>
+
+
+		</td>
+		</tr>
+
+
+
+
+		</table>
+
+	</div>
+</form>
+</body>
+
+<script>
+	function seltj() {
+		var obj = window.document.location;
+		var BASE_PATH = obj.href.substring(0, obj.href.indexOf(obj.pathname));
+		var problemType = $("#problemType").val();
+		 var solveStatus = $("#solveStatus").val();
+		var desc=$("#desc").val();
+		var cjsj1=$("#cjsj1").val();
+		var cjsj2=$("#cjsj2").val();
+		var xgsj1=$("#xgsj1").val();
+		var xgsj2=$("#xgsj2").val();
+		// ob.href=BASE_PATH+"";
+		var url=BASE_PATH + "/cmxm/seltj?problemType="+problemType+"&solveStatus="+solveStatus+"&desc="+desc+"&cjsj1="
+		+cjsj1+"&cjsj2="+cjsj2+"&xgsj1="+xgsj1+"&xgsj2="+xgsj2;
+		// alert(url);
+		window.location.href =url;
+
+	}
+</script>
+</html>
+

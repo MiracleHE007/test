@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet"/>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jquery.idealforms.js"></script>
+    <style type="text/css">
+        body{font:normal 15px/1.5 Arial, Helvetica, Free Sans, sans-serif;color: #222;background:url(pattern.png);overflow-y:scroll;padding:60px 0 0 0;}
+        #my-form{width:755px;margin:0 auto;border:1px solid #ccc;padding:3em;border-radius:3px;box-shadow:0 0 2px rgba(0,0,0,.2);}
+        #comments{width:350px;height:100px;}
+    </style>
+
+    <style>
+        fieldset{
+            background-color: #f1f1f1;
+            border: none;
+            border-radius: 2px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            padding: 0 .625em;
+        }
+
+        label{
+            cursor: pointer;
+            display: inline-block;
+            padding: 3px 6px;
+            text-align: right;
+            width: 150px;
+            vertical-align: top;
+        }
+
+        input{
+            font-size: inherit;
+        }
+    </style>
+    <script type="text/javascript">	var btn11 = document.getElementsByClassName('s1')[0];
+    but11.disabled=false;
+    </script>
+</head>
+<body>
+<div class="row" align="center">
+    <form id="my-form"  action="" name="regist_form" onsubmit="return  testid(id)" method="post">
+
+
+        <div><label>清输入原密码</label>:</label><input id="pass1"  name="password" type="password"/></div>
+        <div><label>清输入新密码</label><input id="pass2" name="password1" type="password"/></div>
+        <div><label>请再次输入:</label><input id="pass3" name="password2" type="password"/></div>
+        <div><hr/></div>
+
+        <div>
+
+            <button type="button" class="s1"  onclick="return  updatePa()">提交</button>
+            <button id="reset" type="reset" >重置</button>
+        </div>
+
+    </form>
+</div>
+</body>
+<script>
+
+
+    function updatePa() {
+        var obj = window.document.location;
+        var BASE_PATH = obj.href.substring(0, obj.href.indexOf(obj.pathname));
+        var loginpassword=$("#pass1").val();
+        var loginpassword1=$("#pass2").val();
+        var loginpassword2=$("#pass3").val();
+        if(loginpassword==""||loginpassword1==""||loginpassword2==""){
+            alert("信息不完整");
+            return false;
+        }else if(loginpassword1.length<8||loginpassword<8||loginpassword2<8){
+            alert("请输入至少8位密码")
+            return false;
+        }else if(loginpassword1!=loginpassword2){
+            alert(loginpassword1+"两次密码不正确"+loginpassword2);
+            return false;
+        }
+
+        var login={
+            "loginpassword":loginpassword,
+            "loginpassword1":loginpassword1
+        }
+        $.ajax({
+            url:BASE_PATH+"/cmxm/updateP",
+            type:"post",
+            data:login,
+            success:function(data){
+                if(data=="1"){
+                    alert("修改成功,请重新登录！");
+                    window.location.href=BASE_PATH+"/cmxm/login"
+                }else{
+                    $("#loginUser").val("");
+                    $("#loginPassword").val("");
+                    $("#msg").html("<i class=\"fa fa-comments-o fa-1x\">&nbsp;&nbsp;"+data["returnMsg"]+"</i>");
+                    alert(data);
+                }
+            },
+        })
+    }
+</script>
+
+</html>

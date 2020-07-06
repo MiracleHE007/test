@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>项目管理系统 </title>
+    <style type="text/css">
+        <!--
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+        .tabfont01 {
+            font-family: "宋体";
+            font-size: 9px;
+            color: #555555;
+            text-decoration: none;
+            text-align: center;
+        }
+        .font051 {font-family: "宋体";
+            font-size: 12px;
+            color: #333333;
+            text-decoration: none;
+            line-height: 20px;
+        }
+        .font201 {font-family: "宋体";
+            font-size: 12px;
+            color: #FF0000;
+            text-decoration: none;
+        }
+        .button {
+            font-family: "宋体";
+            font-size: 14px;
+            height: 37px;
+        }
+        html { overflow-x: auto; overflow-y: auto; border:0;}
+        -->
+    </style>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <link href="css/css.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+    </script>
+
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<SCRIPT language=JavaScript>
+    function sousuo(){
+        window.open("gaojisousuo.htm","","depended=0,alwaysRaised=1,width=800,height=510,location=0,menubar=0,resizable=0,scrollbars=0,status=0,toolbar=0");
+    }
+    function selectAll(){
+        var obj = document.fom.elements;
+        for (var i=0;i&lt;obj.length;i++){
+            if (obj[i].name == "delid"){
+                obj[i].checked = true;
+            }
+        }
+    }
+
+    function unselectAll(){
+        var obj = document.fom.elements;
+        for (var i=0;i&lt;obj.length;i++){
+            if (obj[i].name == "delid"){
+                if (obj[i].checked==true) obj[i].checked = false;
+                else obj[i].checked = true;
+            }
+        }
+    }
+
+    function link(){
+        document.getElementById("fom").action="addrenwu.htm";
+        document.getElementById("fom").submit();
+    }
+
+</SCRIPT>
+
+
+
+<body>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+        <tr>
+            <td height="30">      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+
+                <tr>
+                <label ><h3>一共有<span th:text="${testSize }"></span>条数据
+                        <input id="dow" name="dow" type="button" onclick="axax()" value="导出数据"/></h3> </label>
+
+                    <td height="40" class="font42">
+
+<form name="fom" id="fom" method="post" action="">
+    <table width="100%" border="0" cellpadding="4" cellspacing="1" bgcolor="greenyellow" class="newfont03">
+        <tr class="CTitle" >
+            <td height="28" bgcolor="#46B8DA" colspan="13" align="center" style="font-size:16px">日志详细列表</td>
+        </tr>
+        <tr bgcolor="#EEEEEE">
+            <td style="display: none" width="7%" align="center" height="30">问题id</td>
+            <td class="information-desc" width="13%">问题描述</td>
+            <td width="13%">问题类型</td>
+            <td width="13%">是否解决</td>
+            <td width="7%">归属人</td>
+            <td width="13">备注</td>
+            <td width="13%">创建时间</td>
+            <td width="13%">修改时间</td>
+            <td width="13">操作</td>
+        </tr>
+        <tr bgcolor="#FFFFFF" th:each="li:${testList}">
+            <td style="display: none"  height="30" th:text="${li.id}"></td>
+            <td  th:text="${li.question_desc}" numberOfLines="6"></td>
+            <td  th:text="${li.problem_name}"></td>
+            <td  th:text="${li.solve_name}"></td>
+            <td  th:text="${li.login_user}"></td>
+            <td  th:text="${li.question_bz}" numberOfLines="6"></td>
+            <td  th:text="${li.create_time}"></td>
+            <td  th:text="${li.update_time}"></td>
+            <td><a th:href="@{'/selxiangxi?uid='+${li.id}}">查看|</a>
+                <a  th:href="@{'/delete_sel?uid='+${li.id}}" onclick="javascript:return(confirm('是否确认删除条数据'));" >删除|</a>
+                <a th:href="@{'/updatejj?uid='+${li.id}}">已解决|</a>  <a th:href="@{'/tjbz?uid='+${li.id}}">添加备注</a></td>
+        </tr>
+
+    </table>
+                    </td>
+    </tr>
+
+    </table>
+'
+    <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+            <td height="6"><img src="images/spacer.gif" width="1" height="1" />
+                <input style="display: none" type="text" id="rcid" name="rcid" th:value="${session.dcid}"/>
+            </td>
+
+        </tr>
+
+    </table>
+
+    </td>
+    </tr>
+    </table></td>
+    </tr>
+    </td>
+    </table>
+</form>
+</body>
+<script>
+    function axax() {
+        var aaa=$("#rcid").val();
+        if(aaa==null||aaa==""){
+            alert("请在条件查询中查询后下载！");
+            return false;
+        }else{
+            window.top.location.href='/cmxm/XXXX';
+        }
+    }
+</script>
+</html>

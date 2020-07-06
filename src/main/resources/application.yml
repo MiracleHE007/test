@@ -1,0 +1,24 @@
+spring:
+  resources:
+    static-locations: classpath:/static,classpath:/templates
+  datasource:
+    name: rootaaaa
+    password: Ss7890700..
+    url: jdbc:mysql://121.199.11.36/demo?useUnicode=true&useSSL=false&characterEncoding=UTF8&user=root&password=123456&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+server:
+  port: 8080
+  servlet:
+    context-path: /cmxm
+
+mybatis:
+  type-aliases-package: com.wondersgroup.cmxm.dataobject
+  mapper-locations: classpath:mapper/*.xml
+logging:
+  level:
+    com:
+      wondersgroup:
+        cmxm:
+          repository: debug

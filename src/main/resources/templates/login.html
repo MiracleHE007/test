@@ -1,0 +1,136 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>管理平台</title>
+
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	overflow:hidden;
+}
+.STYLE3 {color: #528311; font-size: 12px;}
+.STYLE4 {
+	color: #42870a;
+	font-size: 12px;
+}
+-->
+</style>
+  <script src="/cmxm/js/jquery-3.2.1.js" type="text/javascript"></script>
+</head>
+
+<body>
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td bgcolor="#e5f6cf">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="608" background="images/login_03.gif"><table width="862" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="266" background="images/login_04.gif">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="95"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          
+          <tr>
+            <td width="424" height="95" background="images/login_06.gif">&nbsp;</td>
+            <td width="183" background="images/login_07.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+              <tr>
+                <td width="21%" height="30"><div align="center"><span class="STYLE3">用户</span></div></td>
+                <td width="79%" height="30"><input type="text" id="loginUser"  name="loginUser" placeholder="请输入用户名"  style="height:18px; width:130px; border:solid 1px #cadcb2; font-size:12px; color:#81b432;"></td>
+              </tr>
+              <tr>
+                <td height="30"><div align="center"><span class="STYLE3">密码</span></div></td>
+                <td height="30"><input  type="password" id="loginPassword" name="loginPassword" placeholder="请输入密码"  style="height:18px; width:130px; border:solid 1px #cadcb2; font-size:12px; color:#81b432;"></td>
+              </tr>
+              <tr>
+                <td height="30">&nbsp;</td>
+                <td height="30"><input type="button" style="height:22px;width:40px;display:inline-block;"  onclick="login()" value="登录">
+                <input type="button" style="height:22px;width:40px;display:inline-block;" onclick="javascrtpt:window.top.location.href='/cmxm/regist.html'" value="注册"></td>
+                 
+              </tr>
+            </table></td>
+            <td width="255" background="images/login_08.gif">&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td height="247" valign="top" background="images/login_091.jpg"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="22%" height="30">&nbsp;</td>
+            <td width="56%">&nbsp;</td>
+            <td width="22%">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="44%" height="20">&nbsp;</td>
+            	<td></td>
+              </tr>
+            </table></td>
+            <td>&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td bgcolor="#a2d962">&nbsp;</td>
+  </tr>
+  <td ><input type="text" style="visibility: hidden" id="msg" name="msg" th:value="${msg}"/> </td>
+</table>
+<map name="Map"><area shape="rect" coords="3,3,36,19" href="#"><area shape="rect" coords="40,3,78,18" href="#"></map>
+</body>
+<script>
+  //style="visibility: hidden"
+  var msg=$("#msg").val();
+  if(window.parent.window!=window){
+    window.top.location.href="/cmxm/login.html";
+     // alert(msg);
+      $("#msg").val("");
+
+  }
+
+  function regist() {
+    var obj = window.document.location;
+    var BASE_PATH = obj.href.substring(0, obj.href.indexOf(obj.pathname));
+    window.location.href=BASE_PATH+"/cmxm/tzregist"
+  }
+
+  function login() {
+    var obj = window.document.location;
+    var BASE_PATH = obj.href.substring(0, obj.href.indexOf(obj.pathname));
+    var loginuser=$("#loginUser").val();
+    var loginpassword=$("#loginPassword").val();
+    if(loginuser==""||loginpassword==""){
+      alert("用户名或密码为空");
+      return false;
+    }
+
+    var login={
+      "loginuser":loginuser,
+      "loginpassword":loginpassword
+    }
+    $.ajax({
+      url:BASE_PATH+"/cmxm/loginC",
+      type:"post",
+      data:login,
+      success:function(data){
+        if(data=="1"){
+          window.location.href=BASE_PATH+"/cmxm/index"
+        }else{
+          $("#loginUser").val("");
+          $("#loginPassword").val("");
+          $("#msg").html("<i class=\"fa fa-comments-o fa-1x\">&nbsp;&nbsp;"+data["returnMsg"]+"</i>");
+          alert(data);
+        }
+      },
+    })
+  }
+</script>
+</html>

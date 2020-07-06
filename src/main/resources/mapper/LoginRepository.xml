@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wondersgroup.cmxm.repository.LoginRepository">
+    <resultMap id="loginMap" type="com.wondersgroup.cmxm.dataobject.Login">
+        <id column="login_id" property="loginId"></id>
+        <result column="login_user" property="loginUser"></result>
+        <result column="login_password" property="loginPassword"></result>
+        <result column="login_status" property="loginStatus"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="update_time" property="updateTime"></result>
+    </resultMap>
+    <select id="findAllByLoginId" parameterType="int" resultMap="loginMap">
+        select a.login_Id,a.login_user,a.login_password,a.login_status,a.create_time,a.update_time from tb_login a where login_id = #{loginId}
+    </select>
+
+    <select id="findOneByLoginUserAndLoginPasswordAndLoginStatus" parameterType="java.util.Map" resultType="com.wondersgroup.cmxm.dataobject.Login">
+        select * from tb_login a  where login_user = #{loginUser} and login_password = #{loginPassword} and login_status=#{loginStatus}
+    </select>
+
+    <insert id="save"  parameterType="com.wondersgroup.cmxm.dataobject.Login">
+        insert into tb_login (login_user,login_password,login_status) values(#{loginUser},#{loginPassword},#{loginStatus})
+    </insert>
+
+    <select id="findLoginUser" resultType="java.lang.Integer">
+        select * from tb_login where login_user =#{login_user}
+    </select>
+
+    <select id="findPassword" resultType="java.lang.Integer">
+        select * from tb_login where login_id=#{login_id} and login_password=#{login_password} and login_status=#{login_status}
+    </select>
+
+    <update id="updatePassword">
+        update tb_login set login_password=#{login_password} where login_id=#{login_id} and login_status=#{login_status}
+    </update>
+
+</mapper>

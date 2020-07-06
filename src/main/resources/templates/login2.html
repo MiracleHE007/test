@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="/cmxm/js/jquery-3.2.1.js" type="text/javascript"></script>
+    <title>首页</title>
+</head>
+<body>
+    <div>
+        <ul>
+            <li>登录</li>
+            <li><input type="text" id="loginUser" placeholder="请输入用户名" /></li>
+        </ul>
+        <ul>
+            <li>密码</li>
+            <li><input type="password" id="loginPassword" placeholder="请输入密码" /> </li>
+        </ul>
+        <ul>
+            <li>
+                <input type="button" value="登录" onclick="login2()" />
+                <input type="button" value="注册" onclick="regist()" />
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+
+    function regist() {
+        var obj = window.document.location;
+        var BASE_PATH = obj.href.substring(0, obj.href.indexOf(obj.pathname));
+        window.location.href=BASE_PATH+"/cmxm/tzregist"
+    }
+
+    function login() {
+        var obj = window.document.location;
+        var BASE_PATH = obj.href.substring(0, obj.href.indexOf(obj.pathname));
+    var loginuser=$("#loginUser").val();
+    var loginpassword=$("#loginPassword").val();
+    if(loginuser==""||loginpassword==""){
+        alert("用户名或密码为空");
+        return false;
+    }
+
+    var login={
+        "loginuser":loginuser,
+        "loginpassword":loginpassword
+    }
+    $.ajax({
+        url:BASE_PATH+"/cmxm/loginC",
+        type:"post",
+        data:login2,
+        success:function(data){
+            if(data=="1"){
+                window.location.href=BASE_PATH+"/cmxm/tzindex"
+            }else{
+                $("#loginUser").val("");
+                $("#loginPassword").val("");
+                $("#msg").html("<i class=\"fa fa-comments-o fa-1x\">&nbsp;&nbsp;"+data["returnMsg"]+"</i>");
+                alert(data);
+            }
+        },
+        })
+    }
+</script>
+</html>
