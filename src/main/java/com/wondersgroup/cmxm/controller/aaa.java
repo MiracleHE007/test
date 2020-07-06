@@ -23,6 +23,5 @@ public class aaa {
 //        System.out.println(aa.equals(bb));
         System.out.println("妈的一个大傻逼");
         System.out.println("s=" + s);
-        System.out.println("1231");
     }
 }
